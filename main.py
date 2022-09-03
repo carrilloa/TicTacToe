@@ -4,7 +4,9 @@
 
 import random
 import time
+import sys
 
+sys.setrecursionlimit(1500)
 
 def main():
     game()
@@ -43,7 +45,7 @@ def game():
         your_turn = False
     else:
         print("Computer starts! ")
-        computer_turn(board_position, comp_letter)
+        computer_turn(board_position, comp_letter, letter)
         your_turn = True
     cat = False
     who_won = ""
@@ -59,7 +61,7 @@ def game():
             else:
                 your_turn = not your_turn
         else:
-            computer_turn(board_position, comp_letter)
+            computer_turn(board_position, comp_letter, letter)
             if check_for_win(board_position, letter, comp_letter):
                 who_won = "The computer"
                 game_won = True
@@ -112,10 +114,14 @@ def choose_letter():
         answer = "O"
     return answer
 
+def is_empty(board, x, y):
+    if board[x][y] == "e":
+        return True
+    else:
+        return False
 
 def random_starting():
-    x = random.randint(0, 1)
-    return x
+    return random.randint(0, 1)
 
 
 def player_turn(starting_letter, board_position, computer_letter):
@@ -125,8 +131,8 @@ def player_turn(starting_letter, board_position, computer_letter):
         return rules
     if turn == "A1":
         if board_position[0][0] == "e":
-            board_position[0][0] = f"{starting_letter}"
-        elif board_position[0][0] == f"{computer_letter}":
+            board_position[0][0] = starting_letter
+        elif board_position[0][0] == computer_letter:
             print("Try again. That spot is taken. ")
             player_turn(starting_letter, board_position, computer_letter)
         else:
@@ -134,8 +140,8 @@ def player_turn(starting_letter, board_position, computer_letter):
             player_turn(starting_letter, board_position, computer_letter)
     if turn == "A2":
         if board_position[1][0] == "e":
-            board_position[1][0] = f"{starting_letter}"
-        elif board_position[1][0] == f"{computer_letter}":
+            board_position[1][0] = starting_letter
+        elif board_position[1][0] == computer_letter:
             print("Try again. That spot is taken. ")
             player_turn(starting_letter, board_position, computer_letter)
         else:
@@ -143,8 +149,8 @@ def player_turn(starting_letter, board_position, computer_letter):
             player_turn(starting_letter, board_position, computer_letter)
     if turn == "A3":
         if board_position[2][0] == "e":
-            board_position[2][0] = f"{starting_letter}"
-        elif board_position[2][0] == f"{computer_letter}":
+            board_position[2][0] = starting_letter
+        elif board_position[2][0] == computer_letter:
             print("Try again. That spot is taken. ")
             player_turn(starting_letter, board_position, computer_letter)
         else:
@@ -152,8 +158,8 @@ def player_turn(starting_letter, board_position, computer_letter):
             player_turn(starting_letter, board_position, computer_letter)
     if turn == "B1":
         if board_position[0][1] == "e":
-            board_position[0][1] = f"{starting_letter}"
-        elif board_position[0][1] == f"{computer_letter}":
+            board_position[0][1] = starting_letter
+        elif board_position[0][1] == computer_letter:
             print("Try again. That spot is taken. ")
             player_turn(starting_letter, board_position, computer_letter)
         else:
@@ -161,8 +167,8 @@ def player_turn(starting_letter, board_position, computer_letter):
             player_turn(starting_letter, board_position, computer_letter)
     if turn == "B2":
         if board_position[1][1] == "e":
-            board_position[1][1] = f"{starting_letter}"
-        elif board_position[1][1] == f"{computer_letter}":
+            board_position[1][1] = starting_letter
+        elif board_position[1][1] == computer_letter:
             print("Try again. That spot is taken. ")
             player_turn(starting_letter, board_position, computer_letter)
         else:
@@ -170,8 +176,8 @@ def player_turn(starting_letter, board_position, computer_letter):
             player_turn(starting_letter, board_position, computer_letter)
     if turn == "B3":
         if board_position[2][1] == "e":
-            board_position[2][1] = f"{starting_letter}"
-        elif board_position[2][1] == f"{computer_letter}":
+            board_position[2][1] = starting_letter
+        elif board_position[2][1] == computer_letter:
             print("Try again. That spot is taken. ")
             player_turn(starting_letter, board_position, computer_letter)
         else:
@@ -179,8 +185,8 @@ def player_turn(starting_letter, board_position, computer_letter):
             player_turn(starting_letter, board_position, computer_letter)
     if turn == "C1":
         if board_position[0][2] == "e":
-            board_position[0][2] = f"{starting_letter}"
-        elif board_position[0][2] == f"{computer_letter}":
+            board_position[0][2] = starting_letter
+        elif board_position[0][2] == computer_letter:
             print("Try again. That spot is taken. ")
             player_turn(starting_letter, board_position, computer_letter)
         else:
@@ -188,8 +194,8 @@ def player_turn(starting_letter, board_position, computer_letter):
             player_turn(starting_letter, board_position, computer_letter)
     if turn == "C2":
         if board_position[1][2] == "e":
-            board_position[1][2] = f"{starting_letter}"
-        elif board_position[1][2] == f"{computer_letter}":
+            board_position[1][2] = starting_letter
+        elif board_position[1][2] == computer_letter:
             print("Try again. That spot is taken. ")
             player_turn(starting_letter, board_position, computer_letter)
         else:
@@ -197,8 +203,8 @@ def player_turn(starting_letter, board_position, computer_letter):
             player_turn(starting_letter, board_position, computer_letter)
     if turn == "C3":
         if board_position[2][2] == "e":
-            board_position[2][2] = f"{starting_letter}"
-        elif board_position[2][2] == f"{computer_letter}":
+            board_position[2][2] = starting_letter
+        elif board_position[2][2] == computer_letter:
             print("Try again. That spot is taken. ")
             player_turn(starting_letter, board_position, computer_letter)
         else:
@@ -208,9 +214,9 @@ def player_turn(starting_letter, board_position, computer_letter):
     print(board_position[1])
     print(board_position[2])
     print("")
+    
 
-
-def computer_turn(board_position, computer_letter):
+def computer_turn(board_position, computer_letter, player_letter):
     print("")
     print("Computer's turn!")
     time.sleep(1)
@@ -219,6 +225,7 @@ def computer_turn(board_position, computer_letter):
         time.sleep(1)
     print("")
 
+    score = minimax(board_position, 0, True, computer_letter, player_letter)
     if board_position[0][0] == "e":
         board_position[0][0] = f"{computer_letter}"
         print(board_position[0])
@@ -305,6 +312,57 @@ def computer_turn(board_position, computer_letter):
     print(board_position[2])
     print("")
 
+    # best_score = -1000
+    # best_move = 0
+
+    # for i in board_position:
+    #     for j in i:
+    #         if board_position[board_position.index(i)][i.index(j)] == "e":
+    #             board_position[board_position.index(i)][i.index(j)] == computer_letter
+    #             score = minimax(board_position, 0, False, computer_letter, player_letter)
+    #             board_position[board_position.index(i)][i.index(j)] == "e"
+    #             if score > best_score:
+    #                 best_score = score
+    #                 best_move = [i, j]
+
+    # board_position[best_move.index(0)][best_move.index(1)] = computer_letter
+    # return
+
+def minimax(board_position, depth, isMaximizing, cl, pl):
+    depth = 0
+    print(check_for_win(board_position, pl, cl))
+    print(check_for_cat(board_position))
+    if check_for_win(board_position, pl, cl) == 1:
+        return -100
+    elif check_for_win(board_position, pl, cl) == 2:
+        return 100
+    elif check_for_cat(board_position):
+        return 0
+    
+    # if isMaximizing:
+    #     best_score = -1000
+    #     for i in board_position:
+    #         for j in i:
+    #             if board_position[board_position.index(i)][i.index(j)] == "e":
+    #                 board_position[board_position.index(i)][i.index(j)] == cl
+    #                 score = minimax(board_position, 0, False, cl, pl)
+    #                 board_position[board_position.index(i)][i.index(j)] == "e"
+    #                 if score > best_score:
+    #                     best_score = score
+    #     return best_score
+    # else: 
+    #     best_score = 800
+    #     for i in board_position:
+    #         for j in i:
+    #             if board_position[board_position.index(i)][i.index(j)] == "e":
+    #                 board_position[board_position.index(i)][i.index(j)] == pl
+    #                 score = minimax(board_position, 0, True, cl, pl)
+    #                 board_position[board_position.index(i)][i.index(j)] == "e"
+    #                 if score < best_score:
+    #                     best_score = score
+    #     return best_score
+
+
 
 def check_for_win(board_position, starting_letter, computer_letter):
     player_win = 1
@@ -368,5 +426,7 @@ def computer_won():
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     main()
+
+
 
 
